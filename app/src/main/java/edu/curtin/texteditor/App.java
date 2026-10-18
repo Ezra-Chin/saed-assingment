@@ -82,7 +82,7 @@ public class App extends Application
         mainBox.setTop(toolBar);
         mainBox.setCenter(textArea);
         Scene scene = new Scene(mainBox);
-        TextEditorService textEditorService = new  TextEditorService(bundle,textArea, toolBar ,locale );
+        TextEditorService textEditorService = new  TextEditorService(bundle,textArea, toolBar ,locale, functionKeyPress,textChange );
         PluginLoader pluginLoader = new PluginLoader();
         ScriptLoader scriptLoader = new ScriptLoader();
         PluginDialog pluginDialog = new PluginDialog(stage, pluginLoader, scriptLoader, textEditorService, bundle);

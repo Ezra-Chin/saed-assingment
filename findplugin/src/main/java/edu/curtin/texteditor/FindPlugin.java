@@ -1,4 +1,4 @@
-package edu.curtin.texteditor.findplugin;
+package edu.curtin.texteditor;
 
 import edu.curtin.texteditor.api.*;
 import java.util.Locale;
@@ -25,10 +25,10 @@ public class FindPlugin implements PluginService, FunctionKeyPressObserver {
         String text = appService.getText();
         String target = Normalizer.normalize(searchText, Normalizer.Form.NFC);
         String normalizedText = Normalizer.normalize(text, Normalizer.Form.NFC);
-        int index = normalizedText.indextOf(target);
+        int index = normalizedText.indexOf(target);
         if (index != -1 ){
             appService.setSelection(index, index + target.length());
-            appService.setCaretPosition(index + target.length());
+            // appService.setCaretPosition(index);
         }
 
     }

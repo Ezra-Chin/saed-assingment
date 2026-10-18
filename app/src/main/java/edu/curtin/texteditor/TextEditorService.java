@@ -13,14 +13,16 @@ public class TextEditorService implements TextEditorServiceInterface{
     private TextArea textArea;
     private ToolBar toolBar;
     private Locale locale;
+    private FunctionKeyPress functionKeyPress;
+    private TextChange textChange;
 
-    public TextEditorService(ResourceBundle bundle , TextArea textArea, ToolBar toolbar  , Locale locale){
+    public TextEditorService(ResourceBundle bundle , TextArea textArea, ToolBar toolbar  , Locale locale , FunctionKeyPress functionKeyPress , TextChange textChange){
         this.bundle = bundle;
         this.textArea = textArea;
         this.toolBar = toolbar;
         this.locale = locale;
-
-
+        this.functionKeyPress = functionKeyPress;
+        this.textChange = textChange;
     }
 
 
@@ -55,6 +57,7 @@ public class TextEditorService implements TextEditorServiceInterface{
         return textArea.getSelection().getEnd();
     }
     public void setSelection(int start, int end){
+        textArea.requestFocus();
         textArea.selectRange(Math.max(0, Math.min(start, textArea.getLength())), Math.max(0, Math.min(end, textArea.getLength())));
     }
 
@@ -84,6 +87,12 @@ public class TextEditorService implements TextEditorServiceInterface{
     public Locale getLocale(){
         return locale;
 
+    }
+    public void addFunctionKeyPressObserver(FunctionKeyPressObserver o ){
+        functionKeyPress.addObserver(o);
+    }
+    public void addTextChangeObserver(TextChangeObserver o ){
+        textChange.addObserver(o);
     }
 
 }

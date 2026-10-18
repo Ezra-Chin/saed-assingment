@@ -17,6 +17,6 @@ public class ScriptLoader {
         var bindings = context.getBindings("js");
         bindings.putMember("app", appService);
         context.eval("js", code);
-        context.close();
+        // context.close();
     }
 }

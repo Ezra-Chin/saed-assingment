@@ -18,6 +18,7 @@ public interface TextEditorServiceInterface{
     ResourceBundle getResourceBundle();
     Locale getLocale(); 
     String getUserInput();
-    // void addFunctionKeyPressObserver(FunctionKeyPressObserver o );
+    void addFunctionKeyPressObserver(FunctionKeyPressObserver o );
+    void addTextChangeObserver(TextChangeObserver o );
     
 }

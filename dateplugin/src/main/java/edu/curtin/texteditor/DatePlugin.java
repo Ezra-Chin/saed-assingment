@@ -1,4 +1,4 @@
-package edu.curtin.texteditor.dateplugin;
+package edu.curtin.texteditor;
 
 import edu.curtin.texteditor.api.*;
 import java.time.ZonedDateTime;

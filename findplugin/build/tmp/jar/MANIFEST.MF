@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
-TextEditor-Plugin-Main-Class: edu.curtin.texteditor.FindPlugin
+TextEditor-Plugin-Main-Class: edu.curtin.texteditor.findplugin.FindPlugi
+ n
 

@@ -111,7 +111,7 @@ public class PluginDialog {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Script");
-        fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter( "Groovy Scripts", "*.groovy"));
+        fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter( "Groovy Scripts", "*.js"));
 
         File file = fileChooser.showOpenDialog(owner);
 
