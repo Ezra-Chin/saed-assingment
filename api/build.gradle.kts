@@ -1,0 +1,8 @@
+plugins {
+
+    id("texteditor-convention1")
+}
+
+dependencies{
+    implementation("com.google.guava:guava:33.6.0-jre")
+}

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+TextEditor-Plugin-Main-Class: edu.curtin.texteditor.dateplugin.DatePlugi
+ n
+
