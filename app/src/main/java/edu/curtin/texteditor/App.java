@@ -22,7 +22,6 @@ import edu.curtin.texteditor.api.*;
 public class App extends Application
 {
     private static ResourceBundle bundle;
-    private static LoadSaveUI loadSaveUI;
     private List<KeymapParser.ShortcutContext> shortcuts;
     private TextChange textChange = new TextChange();
     private FunctionKeyPress functionKeyPress = new FunctionKeyPress();
@@ -54,10 +53,14 @@ public class App extends Application
             shortcuts = keymapLoader.loadKeymap("keymap.txt");
 
         }catch(IOException e ){
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(bundle.getString("keymap_error"));
+            alert.setHeaderText(bundle.getString("failed_to_load_keymap"));
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
 
-        stage.setTitle("SillyWindowTitlePleaseChange");
+        stage.setTitle(bundle.getString("window"));
         stage.setMinWidth(800);
         stage.setMinHeight(600);
 
@@ -153,79 +156,33 @@ public class App extends Application
         String text = shortcut.STRING().getText();
         text = text.substring(1, text.length() - 1 );
         int position = textArea.getCaretPosition();
+        int temp = textArea.getCaretPosition();
         String caretPosition = shortcut.caretPosition().getText();
         if (caretPosition.equals("atstartofline")){
             String currentText = textArea.getText();
+            // int lastNewLine = currentText.lastIndexOf('\n', position - 1);
             position = currentText.lastIndexOf('\n', position -1 ) + 1; 
         }
         if (action.equals("insert")){
             textArea.insertText(position,text);
-            textArea.positionCaret(position + text.length());
+            // textArea.positionCaret(position + text.length());
+            textArea.positionCaret(temp + text.length());
         }
         if (action.equals("delete")){
             String currentText = textArea.getText();
             if (currentText.startsWith(text,position)){
                 textArea.deleteText(position, position + text.length());
-                textArea.positionCaret(position);
+                // textArea.positionCaret(position);
+                if (caretPosition.equals("atstartofline")){
+                    textArea.positionCaret(temp - text.length());
+                }else if (caretPosition.equals("atcaret")){
+                    textArea.positionCaret(temp);
+                }
+                
             }
         }
     }
 
-
-    private void showDialog1()
-    {
-        // TextInputDialog is a subclass of Dialog that just presents a single text field.
-
-        var dialog = new TextInputDialog();
-        dialog.setTitle("Text entry dialog box");
-        dialog.setHeaderText("Enter text");
-
-        // 'showAndWait()' opens the dialog and waits for the user to press the 'OK' or 'Cancel' button. It returns an Optional, which is a whole other discussion, but we can call 'orElse(null)' on that to get the actual string entered if the user pressed 'OK', or null if the user pressed 'Cancel'.
-
-        var inputStr = dialog.showAndWait().orElse(null);
-        if(inputStr != null)
-        {
-            // Alert is another specialised dialog just for displaying a quick message.
-            new Alert(
-                Alert.AlertType.INFORMATION,
-                "You entered '" + inputStr + "'",
-                ButtonType.OK).showAndWait();
-        }
-    }
-
-    private void showDialog2()
-    {
-        Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("List of things");
-        dialog.setHeaderText("Here's a list of things");
-
-        Button addBtn = new Button("Add...");
-        Button removeBtn = new Button("Remove...");  // You don't need to remove anything; it just looks nice in the demo!
-        ToolBar toolBar = new ToolBar(addBtn, removeBtn);
-
-        addBtn.setOnAction(event ->
-            new Alert(Alert.AlertType.INFORMATION, "You pressed 'Add'.", ButtonType.OK).showAndWait());
-        removeBtn.setOnAction(event ->
-            new Alert(Alert.AlertType.INFORMATION, "You pressed 'Remove'.", ButtonType.OK).showAndWait());
-
-        // 'ObservableList' is a list that's also an Observer Pattern subject, while 'ListView'
-        // shows the list contents on-screen, and registers itself as an observer, so it knows
-        // when the list changes.
-        ObservableList<String> listModel = FXCollections.observableArrayList();
-        ListView<String> listView = new ListView<>(listModel);
-        for(int i = 0; i < 100; i++)
-        {
-            listModel.add("Item " + i);
-        }
-
-        BorderPane box = new BorderPane();
-        box.setTop(toolBar);
-        box.setCenter(new ScrollPane(listView));
-
-        dialog.getDialogPane().setContent(box);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.showAndWait();
-    }
 
 
 }

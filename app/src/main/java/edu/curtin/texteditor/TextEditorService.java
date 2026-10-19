@@ -27,45 +27,55 @@ public class TextEditorService implements TextEditorServiceInterface{
 
 
     //STILL TO BE DETErmINEd ON HO W TO WIRE it 
+    @Override
     public void addButton(String label , ButtonPressObserver o ){
         Button button = new Button(label);
-        button.setOnAction(event -> o.buttonPressed(label));
+        button.setOnAction(event -> o.buttonPressed());
         toolBar.getItems().add(button);
     }
 
 
+    @Override
     public String getText(){
         return textArea.getText();
     }   
+    @Override
     public void setText(String text){
         textArea.setText(text);
     }
 
+    @Override
     public int getCaretPosition(){
         return textArea.getCaretPosition();
     }
 
 
+    @Override
     public void setCaretPosition(int position){
         textArea.positionCaret(Math.max(0, Math.min(position, textArea.getLength())));
     }
 
+    @Override
     public int getSelectionStart(){
         return textArea.getSelection().getStart();
     }
+    @Override
     public int getSelectionEnd(){
         return textArea.getSelection().getEnd();
     }
+    @Override
     public void setSelection(int start, int end){
         textArea.requestFocus();
         textArea.selectRange(Math.max(0, Math.min(start, textArea.getLength())), Math.max(0, Math.min(end, textArea.getLength())));
     }
 
 
+    @Override
     public ResourceBundle getResourceBundle(){
         return bundle;
     }
 
+    @Override
     public String getUserInput(){
         var dialog = new TextInputDialog();
         dialog.setTitle(bundle.getString("find_word"));
@@ -84,13 +94,16 @@ public class TextEditorService implements TextEditorServiceInterface{
         }
         return "";
     }
+    @Override
     public Locale getLocale(){
         return locale;
 
     }
+    @Override
     public void addFunctionKeyPressObserver(FunctionKeyPressObserver o ){
         functionKeyPress.addObserver(o);
     }
+    @Override
     public void addTextChangeObserver(TextChangeObserver o ){
         textChange.addObserver(o);
     }

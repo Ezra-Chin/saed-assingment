@@ -17,7 +17,7 @@ public class FindPlugin implements PluginService, FunctionKeyPressObserver {
         appService.addButton(bundle.getString("find_button"), this::handleFindButton);
     }
 
-    private void handleFindButton(String buttonName){
+    private void handleFindButton(){
         String searchText = appService.getUserInput();
         if (searchText.isEmpty()){
             return;
@@ -36,7 +36,7 @@ public class FindPlugin implements PluginService, FunctionKeyPressObserver {
     @Override
     public void functionKeyPress(String keyNumber){
         if(keyNumber.equals("F3")){
-            handleFindButton("F3");
+            handleFindButton();
         }
 
     }

@@ -8,21 +8,21 @@ import java.util.*;
 
 public class FileIO
 {
-    public String load(File file) throws IOException 
+    public String load(File file, String encoding) throws IOException 
     {
         String text = "";
-        try(BufferedReader br = new BufferedReader(new FileReader(file)))
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(file), encoding );
+        try(BufferedReader br = new BufferedReader(isr))
         {
             String line;
-            while((line = br.readLine()) != null)
-            {
+            while((line = br.readLine()) != null) {
                 text += line + "\n";
             }
         }
         return text;
     }
     
-    public void save(File file, String text) throws IOException
+    public void save(File file, String text, String encoding ) throws IOException
     {
         try(PrintWriter pw = new PrintWriter(file))
         {

@@ -13,9 +13,9 @@ public class ButtonPress {
         observers.remove(o);
     }
 
-    public void notifyObservers(String newText){
+    public void notifyObservers(){
         for (ButtonPressObserver o : new ArrayList<>(observers)){
-            o.buttonPressed(newText);
+            o.buttonPressed();
         }
     }
 }

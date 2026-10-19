@@ -5,9 +5,11 @@ plugins{
 repositories{
     mavenCentral()
 }
-pmd{
+
+pmd {
     toolVersion = "7.26.0"
-    ruleSets = listOf("saed-pmd-rules.xml")
+    ruleSets = listOf()
+    ruleSetFiles = files(rootProject.file("saed-pmd-rules.xml"))
 }
 
 java {

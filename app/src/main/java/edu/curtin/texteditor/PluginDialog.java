@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
-
+import java.io.IOException;
 
 
 
@@ -86,9 +86,9 @@ public class PluginDialog {
         }
 
         TextInputDialog classDialog = new TextInputDialog();
-        classDialog.setTitle("Plugin Entry Point");
-        classDialog.setHeaderText("Enter the plugin's fully-qualified class name");
-        classDialog.setContentText("Class name:");
+        classDialog.setTitle(bundle.getString("plugin_entry_point"));
+        classDialog.setHeaderText(bundle.getString("plugin_class_name"));
+        classDialog.setContentText(bundle.getString("class_name"));
 
         classDialog.showAndWait().ifPresent(className -> {
 
@@ -101,8 +101,8 @@ public class PluginDialog {
 
                 listModel.add( className.trim());
 
-            } catch (Exception exception) {
-                showError("Failed to load plugin", exception);
+            } catch (ReflectiveOperationException | IOException e) {
+                showError(bundle.getString("error_load_plugin"), e);
             }
         });
     }
@@ -110,8 +110,8 @@ public class PluginDialog {
     private void loadScript() {
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Script");
-        fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter( "Groovy Scripts", "*.js"));
+        fileChooser.setTitle(bundle.getString("select_script"));
+        fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter( bundle.getString("js_script"), "*.js"));
 
         File file = fileChooser.showOpenDialog(owner);
 
@@ -124,8 +124,8 @@ public class PluginDialog {
 
             listModel.add( file.getName());
 
-        } catch (Exception exception) {
-            showError("Failed to load script", exception);
+        } catch (ReflectiveOperationException| IOException e ) {
+            showError("Failed to load script", e);
         }
     }
 

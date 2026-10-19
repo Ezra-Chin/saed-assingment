@@ -18,11 +18,11 @@ public class DatePlugin implements PluginService{
         appService.addButton(bundle.getString("date_button"), this::handleDateButton);
     }
 
-    private void handleDateButton(String buttonName){
+    //TECHNCIALLY THIS IS AN OBSERVER ? 
+    private void handleDateButton(){
 
         ZonedDateTime time = ZonedDateTime.now();
-        Locale locale = appService.getResourceBundle().getLocale();
-        DateTimeFormatter dtf1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale);
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(appService.getLocale());
         String dateFmt = dtf1.format(time);
 
 

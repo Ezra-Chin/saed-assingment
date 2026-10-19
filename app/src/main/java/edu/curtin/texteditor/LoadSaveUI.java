@@ -58,7 +58,7 @@ public class LoadSaveUI
                 btn -> (btn == ButtonType.OK) ? encodingComboBox.getValue() : null);
             
             content.setHgap(SPACING);
-            content.getChildren().setAll(new Label("Encoding"), encodingComboBox);
+            content.getChildren().setAll(new Label(bundle.getString("encoding")), encodingComboBox);
             
             encodingComboBox.getItems().setAll("UTF-8", "UTF-16", "UTF-32");
             encodingComboBox.setValue("UTF-8");
@@ -84,7 +84,7 @@ public class LoadSaveUI
             
                 try
                 {
-                    textArea.setText(fileIO.load(f));
+                    textArea.setText(fileIO.load(f,encoding));
                 }
                 catch(IOException e)
                 {
@@ -115,7 +115,7 @@ public class LoadSaveUI
                 
                 try
                 {
-                    fileIO.save(f, textArea.getText());
+                    fileIO.save(f, textArea.getText() , encoding );
                 }
                 catch(IOException e)
                 {
