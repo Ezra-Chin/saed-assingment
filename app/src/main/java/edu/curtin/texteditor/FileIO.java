@@ -24,8 +24,11 @@ public class FileIO
     
     public void save(File file, String text, String encoding ) throws IOException
     {
-        try(PrintWriter pw = new PrintWriter(file))
-        {
+        // try(PrintWriter pw = new PrintWriter(file))
+        // {
+        //     pw.print(text);
+        // }
+        try( PrintWriter pw = new PrintWriter( new OutputStreamWriter( new FileOutputStream(file),encoding))){
             pw.print(text);
         }
     }

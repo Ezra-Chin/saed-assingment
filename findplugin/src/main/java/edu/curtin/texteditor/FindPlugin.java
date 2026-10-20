@@ -23,9 +23,17 @@ public class FindPlugin implements PluginService, FunctionKeyPressObserver {
             return;
         }
         String text = appService.getText();
+        int caret = appService.getCaretPosition();
+
+
         String target = Normalizer.normalize(searchText, Normalizer.Form.NFC);
         String normalizedText = Normalizer.normalize(text, Normalizer.Form.NFC);
-        int index = normalizedText.indexOf(target);
+
+
+        int normalizedCaret = Normalizer.normalize(text.substring(0,caret), Normalizer.Form.NFC).length();
+
+        //basically searching for target from normalized Craet Position
+        int index = normalizedText.indexOf(target, normalizedCaret);
         if (index != -1 ){
             appService.setSelection(index, index + target.length());
             // appService.setCaretPosition(index);
