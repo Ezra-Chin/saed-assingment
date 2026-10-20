@@ -22,7 +22,7 @@ import edu.curtin.texteditor.api.*;
 public class App extends Application
 {
     private static ResourceBundle bundle;
-    private List<KeymapParser.ShortcutContext> shortcuts;
+    private List<KeymapParser.ShortcutContext> shortcuts = new ArrayList<>();
     private TextChange textChange = new TextChange();
     private FunctionKeyPress functionKeyPress = new FunctionKeyPress();
     private static Locale locale;
@@ -104,7 +104,7 @@ public class App extends Application
             textChange.notifyObservers(newValue);
         });
 
-        textArea.setText("This is some\ndemonstration text\nTry pressing F1, ctrl+b, ctrl+shift+b or alt+b.");
+        // textArea.setText("This is some\ndemonstration text\nTry pressing F1, ctrl+b, ctrl+shift+b or alt+b.");
         textArea.selectRange(8, 16); // Select a range of text (and move the caret to the end)
 
 
